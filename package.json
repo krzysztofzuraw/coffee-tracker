@@ -1,0 +1,44 @@
+{
+  "name": "coffee-tracker",
+  "version": "0.1.0",
+  "description": "Coffee brew tracker",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint:tsc": "tsc --project . --noEmit",
+    "lint:eslint": "eslint 'src/*.{js,ts,tsx}' --quiet --fix",
+    "reinstall": "rimraf node_modules && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krzysztofzuraw/coffee-tracker.git"
+  },
+  "author": "Krzysztof Żuraw <info@kzuraw.com> (https://krzysztofzuraw.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krzysztofzuraw/coffee-tracker/issues"
+  },
+  "homepage": "https://github.com/krzysztofzuraw/coffee-tracker#readme",
+  "dependencies": {
+    "next": "9.5.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "4.4.0",
+    "@typescript-eslint/parser": "4.4.0",
+    "concurrently": "5.3.0",
+    "eslint": "7.10.0",
+    "eslint-config-prettier": "6.12.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-react": "7.21.3",
+    "eslint-plugin-react-hooks": "4.1.2",
+    "husky": "4.3.0",
+    "prettier": "2.1.2",
+    "pretty-quick": "3.0.2",
+    "rimraf": "3.0.2",
+    "typescript": "4.0.3"
+  }
+}
