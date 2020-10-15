@@ -11,7 +11,8 @@
     "start": "next start",
     "lint:tsc": "tsc --project . --noEmit",
     "lint:eslint": "eslint '*.{js,ts,tsx}' --quiet --fix",
-    "reinstall": "rimraf node_modules && npm install"
+    "reinstall": "rimraf node_modules && npm install",
+    "test": "echo to be implemented!"
   },
   "repository": {
     "type": "git",
