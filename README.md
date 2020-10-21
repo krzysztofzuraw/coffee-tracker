@@ -1,1 +1,1 @@
-# coffee-tracker
+# Coffee tracker

@@ -1,14 +1,22 @@
-.main {
+.content {
   padding: 1rem;
   border: 1px solid #333;
   display: grid;
   grid-template-rows: 1fr auto;
+  margin: auto;
+  max-width: 60ch;
 }
 
-.nav {
+.content ul {
+  display: flex;
   list-style: none;
+  margin: 0;
   padding: 0;
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 0.25rem;
+  justify-content: space-between;
+}
+
+.content li {
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: 200;
 }
