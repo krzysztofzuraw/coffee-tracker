@@ -6,16 +6,12 @@ html {
   font-size: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  height: -webkit-fill-available;
 }
 
 body {
   line-height: 1.5;
   padding: 0;
   margin: 0;
-  min-height: 100vh;
-  width: 100vw;
-  min-height: -webkit-fill-available;
 }
 
 input {
