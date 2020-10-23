@@ -5,7 +5,7 @@ import styles from './layout.module.css';
 export default function Layout({ children }: { children?: React.ReactNode }) {
   return (
     <div className={styles.wrapper}>
-      <main className={styles.content}>
+      <main className={`${styles.content} stack`}>
         {children}
         <footer>
           <ul className={styles.nav}>
