@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/krzysztofzuraw/coffee-tracker#readme",
   "dependencies": {
+    "idb": "5.0.7",
     "next": "9.5.4",
     "react": "16.13.1",
     "react-dom": "16.13.1"
