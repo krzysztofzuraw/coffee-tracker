@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 import styles from './layout.module.css';
 
@@ -9,8 +10,12 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         {children}
         <footer>
           <ul className={styles.nav}>
-            <li>Record</li>
-            <li>List</li>
+            <li>
+              <Link href="/">Record</Link>
+            </li>
+            <li>
+              <Link href="/list">List</Link>
+            </li>
             <li>Settings</li>
           </ul>
         </footer>
