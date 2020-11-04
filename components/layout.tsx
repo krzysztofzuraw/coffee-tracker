@@ -8,15 +8,15 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
     <div className={styles.wrapper}>
       <main className={`${styles.content} stack`}>
         {children}
-        <footer>
-          <ul className={styles.nav}>
-            <li>
+        <footer className={styles.footer}>
+          <ul className={styles.footerList}>
+            <li className={styles.footerListItem}>
               <Link href="/">Record</Link>
             </li>
-            <li>
+            <li className={styles.footerListItem}>
               <Link href="/list">List</Link>
             </li>
-            <li>Settings</li>
+            <li className={styles.footerListItem}>Settings</li>
           </ul>
         </footer>
       </main>

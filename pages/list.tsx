@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/layout';
 import { IDBPDatabase, openDB } from 'idb';
 
+import styles from '../styles/list.module.css';
+
 const initDatabase = () =>
   openDB('coffeeTracker', 1, {
     upgrade(db) {
@@ -24,5 +26,28 @@ export default function ListPage() {
     fetchDatabase();
   }, []);
   console.log({ logs });
-  return <Layout>List</Layout>;
+  return (
+    <Layout>
+      <ol className={styles.logItemsList}>
+        {logs.map((log) => (
+          <li key={log.date} className={styles.logItem}>
+            <h2 className={styles.logItemHeader}>{log.coffee}</h2>
+            <time className={styles.logItemDate}>
+              {new Date(log.date).toLocaleString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+              })}
+            </time>
+            <p className={styles.logItemDescription}>
+              {log.roaster} - {log.method}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </Layout>
+  );
 }

@@ -1,0 +1,27 @@
+.logItem {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  border-bottom: 1px dashed black;
+  padding: 0.5rem;
+}
+
+.logItemsList {
+  margin: 0;
+}
+
+.logItemDate {
+  align-self: center;
+  justify-self: end;
+  font-style: italic;
+  font-weight: 200;
+}
+
+.logItemDescription {
+  grid-column: span 2;
+}
+
+.logItemHeader {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
