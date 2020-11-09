@@ -16,7 +16,9 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
             <li className={styles.footerListItem}>
               <Link href="/list">List</Link>
             </li>
-            <li className={styles.footerListItem}>Settings</li>
+            <li className={styles.footerListItem}>
+              <Link href="/settings">Settings</Link>
+            </li>
           </ul>
         </footer>
       </main>

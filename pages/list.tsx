@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/layout';
-import { IDBPDatabase, openDB } from 'idb';
 
 import styles from '../styles/list.module.css';
-
-const initDatabase = () =>
-  openDB('coffeeTracker', 1, {
-    upgrade(db) {
-      const store = db.createObjectStore('logs', {
-        keyPath: 'id',
-        autoIncrement: true,
-      });
-      store.createIndex('date', 'date');
-    },
-  });
+import { CoffeeEntry } from '../helpers/models';
+import { initDatabase } from '../helpers/database';
 
 export default function ListPage() {
-  const [logs, setLogs] = useState<any>([]);
+  const [logs, setLogs] = useState<CoffeeEntry[]>([]);
   useEffect(() => {
     async function fetchDatabase() {
       const db = await initDatabase();
@@ -25,7 +15,7 @@ export default function ListPage() {
     }
     fetchDatabase();
   }, []);
-  console.log({ logs });
+
   return (
     <Layout>
       <ol className={styles.logItemsList}>

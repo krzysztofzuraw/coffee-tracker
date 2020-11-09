@@ -1,0 +1,20 @@
+.exportData {
+  border: 1px solid black;
+  display: grid;
+  max-height: 30%;
+  place-items: center;
+  border-radius: 4px;
+}
+
+.exportButton {
+  padding: 1rem;
+  border: 1px solid #333;
+  font-size: 1.25rem;
+  border-radius: 4px;
+  font-weight: 800;
+  background-color: #fff;
+}
+
+.exportHeader {
+  text-align: center;
+}

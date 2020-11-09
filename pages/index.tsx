@@ -1,56 +1,34 @@
-import React, { useEffect } from 'react';
-import { IDBPDatabase, openDB } from 'idb';
+import React, { useEffect, useState } from 'react';
+import { IDBPDatabase } from 'idb';
 import { useForm } from 'react-hook-form';
 
 import Layout from '../components/layout';
 import styles from '../styles/index.module.css';
-
-const useIDB = () => {
-  const dbRef = React.useRef<IDBPDatabase>();
-
-  async function initIDB() {
-    const db = await openDB('coffeeTracker', 1, {
-      upgrade(db) {
-        const store = db.createObjectStore('logs', {
-          keyPath: 'id',
-          autoIncrement: true,
-        });
-        store.createIndex('date', 'date');
-      },
-    });
-    dbRef.current = db;
-  }
-
-  useEffect(() => {
-    initIDB();
-  }, []);
-
-  return {
-    add: (values: FormValues) => {
-      if (dbRef && dbRef.current) {
-        dbRef.current.add('logs', {
-          ...values,
-          date: Date.now(),
-        });
-      }
-    },
-  };
-};
-
-type FormValues = {
-  coffee: string;
-  roaster: string;
-  method: string;
-  grinder: string;
-  score: string;
-  notes: string;
-};
+import { CoffeeEntry } from '../helpers/models';
+import { CoffeeTrackerDB, initDatabase } from '../helpers/database';
 
 export default function Index() {
-  const { add } = useIDB();
-  const { register, handleSubmit, reset } = useForm<FormValues>();
-  const onSubmit = (data: FormValues) => {
-    add(data);
+  const { register, handleSubmit, reset } = useForm<CoffeeEntry>();
+  const [log, setLog] = useState<CoffeeEntry | null>(null);
+  const dbRef = React.useRef<IDBPDatabase<CoffeeTrackerDB>>();
+
+  useEffect(() => {
+    async function fetchDatabase() {
+      const db = await initDatabase();
+      dbRef.current = db;
+      const tx = db.transaction('logs');
+      const lastLog = await tx.store.openCursor(undefined, 'prev');
+      setLog(lastLog?.value ?? null);
+      await tx.done;
+    }
+    fetchDatabase();
+  }, []);
+
+  const onSubmit = (data: CoffeeEntry) => {
+    dbRef?.current?.add('logs', {
+      ...data,
+      date: Date.now(),
+    });
     reset();
   };
 
@@ -58,7 +36,19 @@ export default function Index() {
     <Layout>
       <form className={`${styles.form} stack`} onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="coffee">Coffee</label>
-        <input type="text" id="coffee" name="coffee" ref={register} placeholder="Name - Country" />
+        <input
+          type="text"
+          id="coffee"
+          name="coffee"
+          ref={register}
+          placeholder="Name - Country"
+          list="coffeeSuggestions"
+        />
+        {log?.coffee && (
+          <datalist id="coffeeSuggestions">
+            <option value={log.coffee} />
+          </datalist>
+        )}
         <label htmlFor="roaster">Roaster</label>
         <input
           type="text"
@@ -66,10 +56,22 @@ export default function Index() {
           name="roaster"
           ref={register}
           placeholder="Where it was roasted?"
+          list="roasterSuggestions"
         />
+        {log?.roaster && (
+          <datalist id="roasterSuggestions">
+            <option value={log.roaster} />
+          </datalist>
+        )}
         <label htmlFor="method">Method</label>
-        <input list="methods" id="method" name="method" ref={register} />
-        <datalist id="methods">
+        <input
+          list="methodSuggestions"
+          id="method"
+          name="method"
+          ref={register}
+          placeholder="How did you do it?"
+        />
+        <datalist id="methodSuggestions">
           <option value="Chemex" />
           <option value="V60" />
           <option value="Aeropress" />
@@ -77,7 +79,13 @@ export default function Index() {
           <option value="French Press" />
         </datalist>
         <label htmlFor="grinder">Grinder setting</label>
-        <select id="grinder" name="grinder" ref={register} defaultValue="20">
+        <select
+          id="grinder"
+          name="grinder"
+          ref={register}
+          defaultValue={log?.grinder ?? '20'}
+          key={log?.grinder}
+        >
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
