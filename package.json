@@ -25,6 +25,9 @@
   },
   "homepage": "https://github.com/krzysztofzuraw/coffee-tracker#readme",
   "dependencies": {
+    "@sentry/browser": "5.27.3",
+    "@sentry/integrations": "5.27.3",
+    "@sentry/node": "5.27.3",
     "idb": "5.0.7",
     "next": "9.5.4",
     "react": "16.13.1",
