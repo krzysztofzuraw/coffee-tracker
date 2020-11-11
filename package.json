@@ -81,6 +81,8 @@
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.21.3",
     "eslint-plugin-react-hooks": "4.1.2",
+    "@sentry/webpack-plugin": "1.13.0",
+    "@zeit/next-source-maps": "0.0.4-canary.1",
     "npm-run-all": "4.1.5",
     "prettier": "2.1.2",
     "pretty-quick": "3.0.2",
